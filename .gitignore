@@ -1,0 +1,42 @@
+# Python specific
+*.pyc
+*.pyo
+__pycache__/
+.python-version
+
+# Virtual environments
+venv/
+env/
+.venv/
+.venv3/
+env/
+.env/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dll
+*.exe
+*.out
+*.bin
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
