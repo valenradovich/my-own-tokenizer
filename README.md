@@ -1,4 +1,4 @@
-# MY OWN
+# my own
 this is a personal project where i develop basic concepts of machine learning and deep learning from scratch. 
 
 the main purpose is to understand the core algorithms that i use everyday.
