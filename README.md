@@ -1,4 +1,4 @@
-# 'my own' - tokenizer
+# 1) 'my own' - tokenizer
 this is a personal project where i develop core concepts of machine learning and deep learning from scratch. 
 
 the main goal is to understand those core algorithms i use on a daily basis. 
@@ -9,10 +9,9 @@ the path i'll follow is:
 - code the functionality completly from scratch using python without main libraries
 - code the functionality using dedicated libraries or even libraries made to solve the algorithm in a sophisticated and efficient way, generally already used in the industry, but still from scratch
 ---
-** the following text was written as quick notes, just to "prove" my knowledge to myself, probably not well written and of course super informal
+***the following text was written as quick notes, just to "prove" my knowledge to myself, probably not well written and of course super informal**
 
-## 1. tokenizer:
-
+### tokenizer:
 is a way to chunk the text from a given sentence to encode into a numerical representation. this is done to feed the llm with a numerical representation of text, aka something that the llm can understand.
 
 those numbers (the text) are pointing to a specific 'coordinates' in n dimensional representation. 
@@ -86,29 +85,12 @@ get idx_start from merges[pair] (final pair represented), get tokens from merge(
 those tokens are 'mapped' with 'vocab' (vocab is constructed from bytes representation (256 chars) and mapped to 'merges', the dict of pairs representation. basically the vocab with the one we encode).
 tokens, now, are just a string like {b"my name is valentin"}, which is a byte string actually. that byte string is decoded using utf-8, to finally, give us the text.
 
+usually when you train the tokenizer with a lot of data, between each text doc, is added an 'special token'. for example <|endoftext|>. the goal for this, is 'explain' the tokenizer that a text doc ends and a new one starts.
 
+same happend when you fine-tune the model. all the '*-instruct' models, fine-tuned to handle a assistant/chat behavior, have particular special tokens like:
+<|im_start|>
+<|im_end|>
+this is done in order to denote structure to the model, and make it understand when a particualar sentence start and ends.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+of course you've to do some little changes in the transformer and the params to handle those special tokens.
+bc your adding integers and you've to make sure about that integer is correctly standed in a vector, specifically for that token. same with the final layer, you've to make sure that every piece of embedding is extended by some of the special tokens.
