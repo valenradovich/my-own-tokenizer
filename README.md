@@ -5,7 +5,7 @@ the main goal is to understand those core algorithms i use on a daily basis.
 
 the path i'll follow is:
 - learn the theory
-- write a summary while i'm learning with my own words
+- write a summary with my own words
 - code the functionality completly from scratch using python without main libraries
 - code the functionality using dedicated libraries or even libraries made to solve the algorithm in a sophisticated and efficient way, generally already used in the industry, but still from scratch
 ---
