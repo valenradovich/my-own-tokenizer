@@ -1,15 +1,18 @@
-# my own
-this is a personal project where i develop basic concepts of machine learning and deep learning from scratch. 
+# 'my own' - tokenizer
+this is a personal project where i develop core concepts of machine learning and deep learning from scratch. 
 
-the main purpose is to understand the core algorithms that i use everyday.
+the main goal is to understand those core algorithms i use on a daily basis. 
 
 the path i'll follow is:
 - learn the theory
 - write a summary while i'm learning with my own words
-- code the algorithm from scratch
+- code the functionality completly from scratch using python without main libraries
+- code the functionality using dedicated libraries or even libraries made to solve the algorithm in a sophisticated and efficient way, generally already used in the industry, but still from scratch
+---
+** the following text was written as quick notes, just to "prove" my knowledge to myself, probably not well written and of course super informal
 
+## 1. tokenizer:
 
-## tokenizer:
 is a way to chunk the text from a given sentence to encode into a numerical representation. this is done to feed the llm with a numerical representation of text, aka something that the llm can understand.
 
 those numbers (the text) are pointing to a specific 'coordinates' in n dimensional representation. 
