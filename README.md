@@ -94,3 +94,22 @@ this is done in order to denote structure to the model, and make it understand w
 
 of course you've to do some little changes in the transformer and the params to handle those special tokens.
 bc your adding integers and you've to make sure about that integer is correctly standed in a vector, specifically for that token. same with the final layer, you've to make sure that every piece of embedding is extended by some of the special tokens.
+
+something else i forgot to mention is the regex used in gpt2 and gpt4 tokenizer. (i figured out about this when i watched karpathy's video)
+
+GPT2_SPLIT_PATTERN = r"""'(?:[sdmt]|ll|ve|re)| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+"""
+GPT4_SPLIT_PATTERN = r"""'(?i:[sdmt]|ll|ve|re)|[^\r\n\p{L}\p{N}]?+\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]++[\r\n]*|\s*[\r\n]|\s+(?!\S)|\s+"""
+
+in this way the tokenizer ensures some key conditions they want to have when "splitting" text. as we can see, both are tokenizing on "*'ll", "*'ve" and "*'re", same split are doing when find numbers, they're getting the first space attached to any word and not the last one " example". 
+
+gpt-4 tokenizer is a little bit more complete, it works on lower and upper case, while gpt2 doesn't. it deletes bigger spaces, just get numbers up to 3 digits, and more.
+
+if we wanna train, not a dummy tokenizer, 'sentencepiece' is the more used library for that in the industry because can do train and inference, which's not allowed by tiktoken (openai tokenizer). i thing hugging face tokenizer is really good as well but dunno if used rn.
+
+sentencepiece is from google and is used by llama, mistral and more llms.
+
+so i was looking more about the vocab size, and why they choose x number. all the numbers are between 50k and 100k and is just based on experiments. we've to concern about rare pairs or new tokens because some new tokens created could be too rare (like just appears once)
+
+as vocab size increases the model embedding table do the same, and of course, the lm head because it have to calculates the logits for more tokens. this all give us the need of more computational power.
+
+vocab size could be extended, as i mentioned before, when fine-tuning for example. this would have some little changes in the model as well.

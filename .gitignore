@@ -4,7 +4,8 @@ test.ipynb
 *.pyo
 __pycache__/
 .python-version
-
+/data/fineweb_edu_sample_500k
+/data/python_code
 # Virtual environments
 venv/
 env/
