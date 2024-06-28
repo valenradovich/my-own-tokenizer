@@ -80,20 +80,6 @@ class SimpleTokenizer:
             self.merges[pair] = idx
             self.vocab[idx] = self.vocab[pair[0]] + self.vocab[pair[1]]
 
-    def decode(self, ids):
-        """
-        Decodes a list of token IDs into a text string.
-
-        Args:
-            ids (list): A list of token IDs.
-
-        Returns:
-            str: The decoded text string.
-        """
-        tokens = b"".join(self.vocab[idx] for idx in ids)
-        text = tokens.decode("utf-8", errors="replace")
-        return text
-
     def encode(self, text):
         """
         Encodes the given text into tokens using the tokenizer's merge algorithm.
@@ -104,8 +90,6 @@ class SimpleTokenizer:
         Returns:
             list: The list of tokens obtained after encoding the text.
         """
-        # print(f"final merges = {self.merges}")
-        
         tokens = list(text.encode("utf-8"))
         
         while len(tokens) >= 2:
@@ -119,6 +103,20 @@ class SimpleTokenizer:
             tokens = self.merge(tokens, pair, idx)
         return tokens
     
+    def decode(self, ids):
+        """
+        Decodes a list of token IDs into a text string.
+
+        Args:
+            ids (list): A list of token IDs.
+
+        Returns:
+            str: The decoded text string.
+        """
+        tokens = b"".join(self.vocab[idx] for idx in ids)
+        text = tokens.decode("utf-8", errors="replace")
+        return text
+    
     def _save_vocab_file(self, filename, root_path):
         """
         Save the tokenizer's vocabulary to a JSON file.
@@ -131,15 +129,13 @@ class SimpleTokenizer:
             None
         """
         serializable_vocab = {}
-        
-        # Convert bytes to UTF-8 strings if possible
+    
         for k, v in self.vocab.items():
             try:
                 decoded_str = v.decode("utf-8")
                 serializable_vocab[k] = decoded_str
             except UnicodeDecodeError:
-                # If decoding fails, store as-is
-                serializable_vocab[k] = list(v)  # or any other appropriate representation
+                serializable_vocab[k] = list(v) 
         
         with open(Path(root_path)/filename, "w") as f:
             json.dump(serializable_vocab, f)
@@ -189,7 +185,6 @@ class SimpleTokenizer:
         with open(vocab_path, "r") as f:
             vocab_data = json.load(f)
         
-        # convert back to bytes or leave as-is based on the type stored in JSON
         loaded_vocab = {int(k): v.encode("utf-8") if isinstance(v, str) else bytes(v) for k, v in vocab_data.items()}
         return loaded_vocab
     
