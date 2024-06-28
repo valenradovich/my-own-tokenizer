@@ -2,10 +2,10 @@
 import json
 from pathlib import Path
 
-class SimpleTokenizer:
+class BaseTokenizer:
     def __init__(self, vocab_size=300):
         """
-        Initialize the SimpleTokenizer object.
+        Initialize the BaseTokenizer object.
 
         Args:
             vocab_size (int): The size of the vocabulary. Default is 300.

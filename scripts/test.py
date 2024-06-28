@@ -3,10 +3,10 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from src.simple_tokenizer import SimpleTokenizer
+from src.base_tokenizer import BaseTokenizer
 
 if __name__ == "__main__":
-    tokenizer = SimpleTokenizer(vocab_size=400)
+    tokenizer = BaseTokenizer(vocab_size=400)
     
     # loading the attributes previously trained
     tokenizer.load_attributes(vocab_filename='vocab.json', merges_filename='merges.txt', root_path='src/attributes/')   
